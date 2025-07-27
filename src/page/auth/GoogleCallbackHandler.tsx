@@ -1,25 +1,55 @@
-import { AUTH_ROUTES } from "@/routes/common/routePaths";
+// import { useEffect } from "react";
+// import { useNavigate, useSearchParams } from "react-router-dom";
+
+// const GoogleCallbackHandler = () => {
+//   const navigate = useNavigate();
+//   const [searchParams] = useSearchParams();
+
+//   useEffect(() => {
+//     const token = searchParams.get("token");
+//     const workspace = searchParams.get("workspace");
+
+//     if (token) {
+//       // ✅ Save token to localStorage (or cookies if using httpOnly server setup)
+//       localStorage.setItem("authToken", token);
+
+//       // ✅ Redirect to workspace page
+//       navigate(`/workspace/${workspace}`);
+//     } else {
+//       // ❌ If token not present, redirect to login
+//       navigate("/login");
+//     }
+//   }, [navigate, searchParams]);
+
+//   return <p>Logging you in...</p>;
+// };
+
+// export default GoogleCallbackHandler;
+
 import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 const GoogleCallbackHandler = () => {
-  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     const token = searchParams.get("token");
-    const workspaceId = searchParams.get("workspace");
+    const workspace = searchParams.get("workspace");
 
-    if (token && workspaceId) {
-      localStorage.setItem("token", token);
-      navigate(`/workspace/${workspaceId}`);
+    if (token) {
+      // ✅ Save token to localStorage (or cookies if using httpOnly server setup)
+      localStorage.setItem("authToken", token);
+
+      // ✅ Redirect to workspace page
+      navigate(`/workspace/${workspace}`);
     } else {
-      console.error("Google OAuth login failed");
-      navigate(AUTH_ROUTES.SIGN_IN);
+      // ❌ If token not present, redirect to login
+      navigate("/login");
     }
   }, [navigate, searchParams]);
 
-  return null;
+  return <p>Logging you in...</p>;
 };
 
 export default GoogleCallbackHandler;
