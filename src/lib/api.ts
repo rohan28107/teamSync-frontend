@@ -30,17 +30,26 @@ export const loginMutationFn = async (
   data: loginType
 ): Promise<LoginResponseType> => {
   const response = await API.post("/auth/login", data);
+
+  // ✅ Store JWT in localStorage
+  localStorage.setItem("token", response.data.token);
+
   return response.data;
 };
 
 export const registerMutationFn = async (data: registerType) =>
   await API.post("/auth/register", data);
 
-export const logoutMutationFn = async () => await API.post("/auth/logout");
+export const logoutMutationFn = async () => {
+  // Clear token
+  localStorage.removeItem("token");
+
+  await API.post("/auth/logout");
+};
 
 export const getCurrentUserQueryFn =
   async (): Promise<CurrentUserResponseType> => {
-    console.log('/user/current')
+    console.log("/user/current");
     const response = await API.get(`/user/current`, { withCredentials: true });
     return response.data;
   };
@@ -212,7 +221,7 @@ export const editTaskMutationFn = async ({
   projectId,
   workspaceId,
   data,
-}: EditTaskPayloadType): Promise<{message: string;}> => {
+}: EditTaskPayloadType): Promise<{ message: string }> => {
   const response = await API.put(
     `/task/${taskId}/project/${projectId}/workspace/${workspaceId}/update/`,
     data

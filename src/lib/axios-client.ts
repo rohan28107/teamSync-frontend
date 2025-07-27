@@ -5,11 +5,20 @@ const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 const options = {
   baseURL,
-  withCredentials: true,
+  // withCredentials: true,
   timeout: 10000,
 };
 
 const API = axios.create(options);
+
+// ✅ Add token to headers for every request
+API.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
 
 API.interceptors.response.use(
   (response) => {
@@ -20,6 +29,9 @@ API.interceptors.response.use(
 
     if (data === "Unauthorized" && status === 401) {
       window.location.href = "/";
+
+       // Clear token if unauthorized
+      localStorage.removeItem("token");
     }
 
     const customError: CustomError = {
