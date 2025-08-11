@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
+  // CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Logo from "@/components/logo";
-import GoogleOauthButton from "@/components/auth/google-oauth-button";
+// import GoogleOauthButton from "@/components/auth/google-oauth-button";
 import { useMutation } from "@tanstack/react-query";
 import { registerMutationFn } from "@/lib/api";
 import { toast } from "@/hooks/use-toast";
@@ -84,22 +84,22 @@ const SignUp = () => {
           <Card>
             <CardHeader className="text-center">
               <CardTitle className="text-xl">Create an account</CardTitle>
-              <CardDescription>
+              {/* <CardDescription>
                 Signup with your Email or Google account
-              </CardDescription>
+              </CardDescription> */}
             </CardHeader>
             <CardContent>
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
                   <div className="grid gap-6">
-                    <div className="flex flex-col gap-4">
+                    {/* <div className="flex flex-col gap-4">
                       <GoogleOauthButton label="Signup" />
-                    </div>
-                    <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
+                    </div> */}
+                    {/* <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
                       <span className="relative z-10 bg-background px-2 text-muted-foreground">
                         Or continue with
                       </span>
-                    </div>
+                    </div> */}
                     <div className="grid gap-2">
                       <div className="grid gap-2">
                         <FormField
