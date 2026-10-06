@@ -1,1 +1,1 @@
-
+[![Architecture diagram of rohan28107/teamsync-frontend](https://gitdiagram.com/rohan28107/teamsync-frontend/diagram.png)](https://gitdiagram.com/rohan28107/teamsync-frontend?utm_source=readme&utm_medium=picture)
